@@ -1,0 +1,10 @@
+pymupdf
+python-dotenv
+numpy
+sentence-transformers
+rank-bm25
+transformers
+accelerate
+torch
+pytest
+datasets

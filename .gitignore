@@ -1,0 +1,24 @@
+__pycache__/
+*.py[cod]
+.env
+data/index/
+data/scifact/
+data/scifact_index/
+
+# Learning material and benchmark-only files
+notebooks/
+tests/
+rag_pipeline_eval.py
+rag_pipeline_eval.jsonl
+evaluate_scifact.py
+
+# Local source data and experimental scripts
+*.pdf
+build_rag.py
+cross_encoder_rag.py
+dense_retriever.py
+/generator.py
+hybrid_retriver.py
+rag.py
+run_baseline_rag.py
+my.env
