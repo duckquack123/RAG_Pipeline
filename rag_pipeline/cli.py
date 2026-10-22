@@ -16,6 +16,13 @@ def main() -> None:
     query.add_argument("--retrieve-only", action="store_true")
     query.add_argument("--source")
     query.add_argument("--page", type=int)
+    visualize = subparsers.add_parser(
+        "visualize", help="Generate retrieval and embedding diagnostic plots"
+    )
+    visualize.add_argument("question")
+    visualize.add_argument("--output-dir", default="data/visualizations")
+    visualize.add_argument("--no-rerank", action="store_true")
+    visualize.add_argument("--candidate-k", type=int, default=10)
     args = parser.parse_args()
 
     pipeline = RAGPipeline(RAGConfig.from_environment())
@@ -24,6 +31,13 @@ def main() -> None:
         print(f"Index written to {pipeline.config.index_dir}")
         return
     pipeline.load_index()
+    if args.command == "visualize":
+        from .visualization import generate_visualizations
+        print(json.dumps(generate_visualizations(
+            pipeline, args.question, args.output_dir,
+            rerank=not args.no_rerank, candidate_k=args.candidate_k
+        ), indent=2))
+        return
     results = pipeline.retrieve(args.question, source=args.source, page=args.page)
     if not args.no_rerank:
         results = pipeline.rerank(args.question, results)

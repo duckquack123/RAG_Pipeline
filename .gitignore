@@ -4,6 +4,7 @@ __pycache__/
 data/index/
 data/scifact/
 data/scifact_index/
+data/visualizations/
 
 # Learning material and benchmark-only files
 notebooks/
